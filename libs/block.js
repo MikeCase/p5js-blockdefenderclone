@@ -4,7 +4,7 @@ class Block {
         this.width = 100;
         this.height = 75;
         this.col = col;
-        
+        this.lane_bottom = 495;
     }
     
     show() {
@@ -21,7 +21,7 @@ class Block {
     }
 
     offscreen (){
-        if(this.pos.y-this.height > 495){
+        if(this.pos.y-this.height > this.lane_bottom){
             return true;
         }
     }
