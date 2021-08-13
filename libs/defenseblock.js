@@ -1,17 +1,57 @@
-class DefenseBlock{
-    constructor(){
-        const RED = color(255, 0,0);
-        const GREEN = color(0,255,0);
-        const BLUE = color(0, 0, 255);
-
-        this.buttons = [
-            new Block(15, height - 15, RED),
-            new Block((width / 2) - 53, height - 15, GREEN),
-            new Block(width - 118, height - 15, BLUE)
-        ];
+class DefenseBlock extends Block{
+    constructor(x,y,col){
+        super(x,y,col);
+        // const RED = color(255, 0,0);
+        // const GREEN = color(0,255,0);
+        // const BLUE = color(0, 0, 255);
+        // this.body.isStatic = true;
+        
+        // this.buttons = [
+        //     new Block(15, height - 15, RED),
+        //     new Block((width / 2) - 53, height - 15, GREEN),
+        //     new Block(width - 118, height - 15, BLUE)
+        // ];
         
         this.ammoColor;
+        
+    }
 
+    redButton(){
+        push();
+        translate(15+this.width/2, height-(this.height/2+15));
+        const RED = color(255, 0,0);
+
+        fill(RED);
+        rectMode(CENTER);
+
+        rect(0, 0, this.width, this.height);
+        pop();
+
+    }
+
+    greenButton(){
+        push();
+        translate((width / 2) - 53+ (this.width/2), height - (this.height/2+15));
+        const GREEN = color(0,255,0);
+
+        fill(GREEN);
+        rectMode(CENTER);
+        rect(0, 0, this.width, this.height);
+        pop();
+        
+    }
+
+    blueButton(){
+        push();
+        translate(width - 118 + (this.width/2), height -(this.height/2+15));
+        const BLUE = color(0, 0, 255);
+
+        fill(BLUE);
+        rectMode(CENTER);
+
+        rect(0, 0, this.width, this.height);
+        pop();
+        
     }
 
     show(){
@@ -19,9 +59,9 @@ class DefenseBlock{
         noStroke();
         fill(0);
         rect(0, height-105, width, height);
-        for (let b of this.buttons){
-            b.show();
-        }
+        this.redButton();
+        this.greenButton();
+        this.blueButton();
         pop();
     }
 
@@ -29,14 +69,9 @@ class DefenseBlock{
         
     }
 
-    clicked(){
-        for (let b of this.buttons){
-            // let d = dist(mouseX, mouseY, b.pos.x, b.pos.y);
-            if (mouseX < b.pos.x+(b.width) && mouseX > b.pos.x && mouseY > b.pos.y-b.height && mouseY < b.pos.y){
-                console.log("Clicked on the " + b.col + " button");
-                this.ammoColor = b.col;
-            }
-        }
+    clicked(col){
+        console.log("Clicked on the " + col + " button");
+        this.ammoColor = col;
     }
 
     reset_ammo_color(){

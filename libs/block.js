@@ -4,14 +4,20 @@ class Block {
         this.width = 100;
         this.height = 75;
         this.col = col;
-        
+        // this.body = Matter.Bodies.rectangle(x, y, this.width, this.height);
+        // Matter.World.add(world, this.body);
     }
     
     show() {
+        // const pos = this.body.position;
+        // const angle = this.body.angle;
         push();
+        translate(this.pos.x, this.pos.y);
+        // rotate(angle);
         fill(this.col);
         noStroke();
-        rect(this.pos.x , this.pos.y - this.height, this.width, this.height);
+        rectMode(CENTER);
+        rect(0-(this.width/2) , 0 - (this.height/2), this.width, this.height);
         pop();
     }
 

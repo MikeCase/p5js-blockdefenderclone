@@ -48,9 +48,11 @@ class Score{
     }
 
     gameOver(blocks){
+        
         for (let b of blocks){
             blocks.splice(b,1);
         }
+
         push();
         fill(255);
         textSize(64);

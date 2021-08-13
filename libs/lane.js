@@ -72,7 +72,7 @@ class Lane {
     }
 
     dropBlock(){
-        this.blocks.push(new Block(this.laneStart+15, -100, random(this.blockColors)));
+        this.blocks.push(new Block(this.laneStart+15+100, -100, random(this.blockColors)));
     }
 
     
