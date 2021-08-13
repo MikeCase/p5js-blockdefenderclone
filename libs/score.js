@@ -4,6 +4,7 @@ class Score{
         this.size = 32;
         this.col = 255;
         this.score = 0;
+        this.level = 1;
     }
 
     show() {
@@ -28,6 +29,22 @@ class Score{
 
     getScore() {
         return this.score;
+    }
+
+    showLevel(){
+        push();
+        fill(255);
+        textSize(32);
+        text("Level " + this.level, width-150, 50);
+        pop();
+    }
+
+    setLevel(){
+        if (this.getScore() % 10 == 0) {
+            this.level += 1; 
+            console.log('Level now: ' + this.level);  
+            return;
+        }
     }
 
     gameOver(blocks){

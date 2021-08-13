@@ -8,7 +8,6 @@ class Lane {
         this.blockColors = [color(255, 0, 0), color(0, 255, 0), color(0, 0, 255)];
         this.ammoBlock = [];
         this.score = score;
-        this.level = 1;
         
     }
 
@@ -20,27 +19,28 @@ class Lane {
         pop();
     }
 
+    
     update(){
-        // if(frameCount % floor(random(400, 800)) === 0){
-        //     this.dropBlock();
-        // }
+        
         if (millis() % floor(random(30,60)) == 0){
             console.log('Dropping a block');
             this.dropBlock();
         }
 
+        
         if (this.ammoBlock.length > 0){
             for(let ab of this.ammoBlock){
                 ab.show();
                 ab.update();
-
+                
                 if (this.blocks.length > 0){
                     if (ab.hits(this.blocks)){
                         this.ammoBlock.splice(ab, 1);
-                        score.addScore();
+                        this.score.addScore();
+                        this.score.setLevel();
                     }
                 }
-
+                
                 if (ab.offscreen()){
                     this.ammoBlock.splice(ab, 1);
                     console.log('offscreen ammo, removed');
@@ -52,20 +52,22 @@ class Lane {
         if (this.blocks.length > 0){
             for (let b of this.blocks){
                 b.show();
-                b.update();
-
+                b.update(this.score.level);
+                
                 if (this.ammoBlock.length > 0){
                     b.hits(this.ammoBlock);
                 }
-
+                
                 if (b.offscreen()){
                     console.log('Block offscreen, removed.');
                     this.blocks.splice(b, 1);
                     this.score.delScore(this.blocks);
+                    // this.setLevel();
                 }
             }
         }
-        this.setLevel();
+        // this.setLevel();
+        // this.showLevel();
         
     }
 
@@ -73,12 +75,7 @@ class Lane {
         this.blocks.push(new Block(this.laneStart+15, -100, random(this.blockColors)));
     }
 
-    setLevel(){
-        if (this.score.getScore() % 5 == 0) {
-            this.level += 1; 
-            console.log('Level now: ' + this.level);  
-        }
-    }
+    
 
     loadAmmoBlock(col){
         console.log('Loading ' + col + ' Ammo Block');

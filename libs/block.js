@@ -15,8 +15,8 @@ class Block {
         pop();
     }
 
-    update(){
-        this.pos.add(createVector(0,3));
+    update(lvlSpd){
+        this.pos.add(createVector(0,1*lvlSpd));
 
     }
 

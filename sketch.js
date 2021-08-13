@@ -33,6 +33,7 @@ function draw(){
         l.show();
     }
     score.show();
+    score.showLevel();
     dfBlock.show();
     // fill(255);
     // textSize(24);
