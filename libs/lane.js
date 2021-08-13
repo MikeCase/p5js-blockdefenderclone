@@ -8,6 +8,7 @@ class Lane {
         this.blockColors = [color(255, 0, 0), color(0, 255, 0), color(0, 0, 255)];
         this.ammoBlock = [];
         this.score = score;
+        this.level = 1;
         
     }
 
@@ -27,7 +28,7 @@ class Lane {
             console.log('Dropping a block');
             this.dropBlock();
         }
-        
+
         if (this.ammoBlock.length > 0){
             for(let ab of this.ammoBlock){
                 ab.show();
@@ -64,11 +65,19 @@ class Lane {
                 }
             }
         }
+        this.setLevel();
         
     }
 
     dropBlock(){
         this.blocks.push(new Block(this.laneStart+15, -100, random(this.blockColors)));
+    }
+
+    setLevel(){
+        if (this.score.getScore() % 5 == 0) {
+            this.level += 1; 
+            console.log('Level now: ' + this.level);  
+        }
     }
 
     loadAmmoBlock(col){
