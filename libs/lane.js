@@ -20,10 +20,14 @@ class Lane {
     }
 
     update(){
-        if(frameCount % floor(random(400, 800)) === 0){
+        // if(frameCount % floor(random(400, 800)) === 0){
+        //     this.dropBlock();
+        // }
+        if (millis() % floor(random(30,60)) == 0){
+            console.log('Dropping a block');
             this.dropBlock();
         }
-
+        
         if (this.ammoBlock.length > 0){
             for(let ab of this.ammoBlock){
                 ab.show();

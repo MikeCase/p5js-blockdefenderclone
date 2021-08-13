@@ -16,7 +16,7 @@ class Block {
     }
 
     update(){
-        this.pos.add(createVector(0,1));
+        this.pos.add(createVector(0,3));
 
     }
 
