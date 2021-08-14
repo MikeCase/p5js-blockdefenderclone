@@ -6,11 +6,14 @@ let laneB = 130+15+100+15;
 let laneC = 260+15+100+15;
 let lanes = [];
 let score;
-// let world, engine;
+var Engine = Matter.Engine;
+var Composite = Matter.Composite;
+var Bodies = Matter.Bodies;
+let engine, composite;
 
 function setup(){
-    // engine = Matter.Engine.create();
-    // world = engine.world;
+    engine = Engine.create();
+    // composite = Composite.create();
     const RED = color(255, 0,0);
     const GREEN = color(0,255,0);
     const BLUE = color(0, 0, 255);
@@ -26,12 +29,13 @@ function setup(){
     lanes.push(new Lane(laneAStart, laneAEnd, RED, score));
     lanes.push(new Lane(laneBStart, laneBEnd, GREEN, score));
     lanes.push(new Lane(laneCStart, laneCEnd, BLUE, score));
-
+    engine.gravity.y = 0.1;
 }
 
 function draw(){
     background(0);
-    // Matter.Engine.update(engine);
+    // engine.gravity.y = map(score.level, 1, 100, 0.05, 1);
+    Engine.update(engine);
     for(l of lanes){
         l.update();
         l.show();
@@ -64,6 +68,7 @@ function mousePressed(){
                 return;
             }
             l.loadAmmoBlock(dfBlock.ammoColor);
+            
             dfBlock.ammoColor = false;
         }
     }

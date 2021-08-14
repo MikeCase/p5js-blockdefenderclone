@@ -4,7 +4,7 @@ class DefenseBlock extends Block{
         // const RED = color(255, 0,0);
         // const GREEN = color(0,255,0);
         // const BLUE = color(0, 0, 255);
-        // this.body.isStatic = true;
+        this.body.isStatic = true;
         
         // this.buttons = [
         //     new Block(15, height - 15, RED),

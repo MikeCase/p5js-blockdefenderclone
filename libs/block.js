@@ -1,19 +1,21 @@
 class Block {
-    constructor(x, y, col){
-        this.pos = createVector(x, y);
+    constructor(x, y, col, level){
+        // this.pos = createVector(x, y);
         this.width = 100;
         this.height = 75;
         this.col = col;
-        // this.body = Matter.Bodies.rectangle(x, y, this.width, this.height);
-        // Matter.World.add(world, this.body);
+        this.body = Bodies.rectangle(x, y, this.width, this.height);
+        Composite.add(engine.world, this.body);
+        this.pos = this.body.position;
+        // engine.gravity.y = map(level, 1, 100, 0.1, 1);
+
     }
     
     show() {
-        // const pos = this.body.position;
-        // const angle = this.body.angle;
+        const angle = this.body.angle;
         push();
         translate(this.pos.x, this.pos.y);
-        // rotate(angle);
+        rotate(angle);
         fill(this.col);
         noStroke();
         rectMode(CENTER);
@@ -22,7 +24,8 @@ class Block {
     }
 
     update(lvlSpd){
-        this.pos.add(createVector(0,1*lvlSpd));
+        // this.pos.add(createVector(0,1*lvlSpd));
+        // this.body.setMass()
 
     }
 

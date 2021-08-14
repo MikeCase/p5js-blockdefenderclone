@@ -1,25 +1,34 @@
 class AmmoBlock extends Block {
     constructor(x,y,col){
         super(x, y, col);
-        this.pos = createVector(x, y);
-        
+        // this.pos = createVector(x, y);
+        this.body = Bodies.rectangle(x,y,this.width, this.height);
+        Composite.add(engine.world, this.body);
         this.col = col;
         console.log(this.col == col);
-    }
-
-    loadAmmo(){
-
+        this.pos = this.body.position;
     }
 
     show(){
+        const angle = this.body.angle;
         push();
+        translate(this.pos.x, this.pos.y)
         fill(this.col);
-        rect(this.pos.x, this.pos.y, this.width, this.height);
+        rotate(angle);
+        rect(0, 0, this.width, this.height);
         pop();
+        this.fire(this.pos.x, this.pos.y);
     }
 
     update(){
-        this.pos.add(createVector(0,-5));
+
+    }
+
+
+    fire(x,y){
+        let pos = createVector(x, y);
+        let force = createVector(0, -0.1);
+        Matter.Body.applyForce(this.body, pos, force)
     }
 
     offscreen() {
